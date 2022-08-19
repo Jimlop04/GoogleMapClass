@@ -1,14 +1,15 @@
 package uteq.solutions.mapas2022
 
+import android.R.id
 import android.graphics.Color
-import android.graphics.Point
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClickListener {
     lateinit var mMap:GoogleMap
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClic
     }
 
     override fun onMapClick(point: LatLng) {
+
+
+
         puntos.add(point)
         mMap.addMarker(
             MarkerOptions().position(point)
@@ -54,8 +58,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClic
             lineas.width(8f)
             lineas.color(Color.RED)
             mMap.addPolyline(lineas)
-            puntos.clear()
         }
+
+        for (i in 1 until puntos.size) {
+            if (puntos.get(i)== point) {
+                puntos.remove(puntos.get(i))
+            }
+        }
+
 
     }
 }
+
+
